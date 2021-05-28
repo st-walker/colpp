@@ -1,0 +1,51 @@
+package:
+  name: colpp
+  version: 0.1.0
+
+source:
+  path: ../
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - cmake>=3.1
+    - conda-forge::xtl
+    - conda-forge::xtensor
+    - python>=3.6
+    - numpy>=1.16
+    - conda-forge::pybind11
+    - conda-forge::xtensor-python
+    
+  run:
+    - numpy>=1.16
+    - python>=3.6
+    
+test:
+  requires:
+    - pytest
+  imports:
+    - colpp
+  
+  commands:
+    - test -d ${PREFIX}/include/colpp           # [unix]
+    - test -f ${PREFIX}/include/colpp/colpp.hpp # [unix]
+    - if exist %LIBRARY_PREFIX%\include\colpp\colpp.hpp (exit 0) else (exit 1)  # [win]
+    # - make cpp-test
+    # -  make python-test
+
+about:
+  home:  https://github.com/st-walker/colpp
+  license: MIT
+  license_family: MIT
+  
+  summary: 'C++ library for collective effects in accelerator physics'
+  description: 'C++ library for collective effects in accelerator physics'
+  documentation_url: https://readthedocs.org/projects/colpp/
+  dev_url: https://github.com/st-walker/colpp
+
+extra:
+  recipe-maintainers:
+    - Stuart Derek Walker
+
